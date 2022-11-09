@@ -29,19 +29,55 @@ function calculateFoodOrder(numAnimals, avgFood) {
  */
 function mostPopularDays(week) {
     // IMPLEMENT THIS FUNCTION!
+    var mostTraffic;
     var mostPopularDay;
-    week.traffic.sort();
-    if(week[week.length-1].traffic>0){
-        mostPopularDay=week[week.length-1].name;
-        var i=week.length-1;
-        do{
-            if(week[i-1].traffic==week[i-1].traffic){
-                mostPopularDay.push(week[week.length-1].name);
+    var mostPopularDays=[];
+    if(week&&week!=""){
+        mostPopularDay=week[0].name;
+        for(var i=0;i<week.length;i++){
+            if(week[i+1].traffic>week[i].traffic){
+                mostPopularDay=week[i+1].name;
+                mostTraffic=week[i+1].traffic;
             }
-            i--;
-        }while(i<0);
+            mostPopularDays.push(mostPopularDay);
+        }
+        for(var i=0;i<week.length;i++){
+            if(week[i].traffic==mostTraffic&&week[i].name!=mostPopularDay){
+                mostPopularDays.push(week[i].name);
+            }
+        }
+        // if(week.length==1){
+        //     mostPopularDays=week[0].name;
+        // }else{
+        //     for(var i=0;i<week.length;i++){
+        //         if(week[i].traffic>week[i+1].traffic){
+        //             mostPopularDay=week[i].name;
+        //             mostTraffic=week[i].traffic;
+        //         }else{
+        //             mostPopularDay=week[i+1].name;
+        //             mostTraffic=week[i+1].traffic;
+        //         }
+        //     }
+        //     for(var i=0;i<week.length;i++){
+        //         if(week[i].traffic==mostTraffic&&week[i].name!=mostPopularDay){
+        //             mostPopularDays.push(week[i].name);
+        //         }
+        //     }
+        }
+    }else{
+        mostPopularDays=null;
     }
-    return mostPopularDay;
+    // if(week.every((currentValue)=>currenteValue>0){
+    //     mostPopularDay=week[week.length-1].name;
+    //     var i=week.length-1;
+    //     do{
+    //         if(week[i-1].traffic==week[i].traffic){
+    //             mostPopularDay.push(week[week.length-1].name);
+    //         }
+    //         i--;
+    //     }while(i<=0);
+    // }
+    return mostPopularDays;
 }
 
 
@@ -58,19 +94,20 @@ function mostPopularDays(week) {
  */
 function createAnimalObjects(names, types, breeds) {
     // IMPLEMENT THIS FUNCTION!
-    var animal={"name":"","type":"","breed":""};
+    var animal={};
     var animals=[];
     if((names)&&(types)&&(breeds)&&((names.lenght==types.length)&&(types.length==breeds.length))){
         for(var i=0;i<=names.length-1;i++){
-            if(names[i]&&types[i]&&breeds[i]){
+            // if(names[i]&&types[i]&&breeds[i]){
                 animal.name=names[i];
                 animal.type=types[i];
                 animal.breed=breeds[i];
                 animals.push(animal);
-            }else{
-                animals=[];
-                i=names.length;
-            }
+            // }
+            // else{
+            //     animals=[];
+            //     i=names.length;
+            // }
         }
     
     }
