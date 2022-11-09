@@ -10,7 +10,12 @@
  */
 function calculateFoodOrder(numAnimals, avgFood) {
     // IMPLEMENT THIS FUNCTION!
-    return numAnimals*avgFood;
+    if(numAnimals>0&&avgFood>0){
+        return numAnimals*avgFood;
+    }else{
+        return -1;
+    }
+    
 }
 
 /**
@@ -24,9 +29,19 @@ function calculateFoodOrder(numAnimals, avgFood) {
  */
 function mostPopularDays(week) {
     // IMPLEMENT THIS FUNCTION!
-    const mostPopularDays=[];
+    var mostPopularDay;
     week.traffic.sort();
-    
+    if(week[week.length-1].traffic>0){
+        mostPopularDay=week[week.length-1].name;
+        var i=week.length-1;
+        do{
+            if(week[i-1].traffic==week[i-1].traffic){
+                mostPopularDay.push(week[week.length-1].name);
+            }
+            i--;
+        }while(i<0);
+    }
+    return mostPopularDay;
 }
 
 
@@ -43,6 +58,23 @@ function mostPopularDays(week) {
  */
 function createAnimalObjects(names, types, breeds) {
     // IMPLEMENT THIS FUNCTION!
+    var animal={"name":"","type":"","breed":""};
+    var animals=[];
+    if((names)&&(types)&&(breeds)&&((names.lenght==types.length)&&(types.length==breeds.length))){
+        for(var i=0;i<=names.length-1;i++){
+            if(names[i]&&types[i]&&breeds[i]){
+                animal.name=names[i];
+                animal.type=types[i];
+                animal.breed=breeds[i];
+                animals.push(animal);
+            }else{
+                animals=[];
+                i=names.length;
+            }
+        }
+    
+    }
+    return animals;
 }
 
 /////////////////////////////////////////////////////////////////
