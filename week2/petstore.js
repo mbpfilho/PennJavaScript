@@ -34,49 +34,28 @@ function mostPopularDays(week) {
     var mostPopularDays=[];
     if(week&&week!=""){
         mostPopularDay=week[0].name;
+        mostTraffic=0;
         for(var i=0;i<week.length;i++){
-            if(week[i+1].traffic>week[i].traffic){
-                mostPopularDay=week[i+1].name;
-                mostTraffic=week[i+1].traffic;
+            if(Number(week[i].traffic)>mostTraffic){
+                mostPopularDay=week[i].name;
+                mostTraffic=Number(week[i].traffic);
             }
-            mostPopularDays.push(mostPopularDay);
         }
+        mostPopularDays=mostPopularDay;
+        var a=false;
         for(var i=0;i<week.length;i++){
-            if(week[i].traffic==mostTraffic&&week[i].name!=mostPopularDay){
+            if(Number(week[i].traffic)==mostTraffic&&week[i].name!=mostPopularDay){
+                if(a==false){
+                    mostPopularDays=[];
+                    mostPopularDays.push(mostPopularDay);
+                    a=true;
+                }
                 mostPopularDays.push(week[i].name);
             }
-        }
-        // if(week.length==1){
-        //     mostPopularDays=week[0].name;
-        // }else{
-        //     for(var i=0;i<week.length;i++){
-        //         if(week[i].traffic>week[i+1].traffic){
-        //             mostPopularDay=week[i].name;
-        //             mostTraffic=week[i].traffic;
-        //         }else{
-        //             mostPopularDay=week[i+1].name;
-        //             mostTraffic=week[i+1].traffic;
-        //         }
-        //     }
-        //     for(var i=0;i<week.length;i++){
-        //         if(week[i].traffic==mostTraffic&&week[i].name!=mostPopularDay){
-        //             mostPopularDays.push(week[i].name);
-        //         }
-        //     }
         }
     }else{
         mostPopularDays=null;
     }
-    // if(week.every((currentValue)=>currenteValue>0){
-    //     mostPopularDay=week[week.length-1].name;
-    //     var i=week.length-1;
-    //     do{
-    //         if(week[i-1].traffic==week[i].traffic){
-    //             mostPopularDay.push(week[week.length-1].name);
-    //         }
-    //         i--;
-    //     }while(i<=0);
-    // }
     return mostPopularDays;
 }
 
@@ -94,22 +73,17 @@ function mostPopularDays(week) {
  */
 function createAnimalObjects(names, types, breeds) {
     // IMPLEMENT THIS FUNCTION!
-    var animal={};
+    function animal(name,type,breed){
+        this.name=name;
+        this.type=type;
+        this.breed=breed;
+    }
     var animals=[];
-    if((names)&&(types)&&(breeds)&&((names.lenght==types.length)&&(types.length==breeds.length))){
-        for(var i=0;i<=names.length-1;i++){
-            // if(names[i]&&types[i]&&breeds[i]){
-                animal.name=names[i];
-                animal.type=types[i];
-                animal.breed=breeds[i];
-                animals.push(animal);
-            // }
-            // else{
-            //     animals=[];
-            //     i=names.length;
-            // }
+    if(names&&types&&breeds&&names.length==types.length&&types.length==breeds.length&&names.length!=0){
+        for(var i=0;i<names.length;i++){
+            var animalx=new animal(names[i],types[i],breeds[i]);
+            animals.push(animalx);
         }
-    
     }
     return animals;
 }
