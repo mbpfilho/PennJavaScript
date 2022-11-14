@@ -4,11 +4,15 @@ class FontChooser extends React.Component {
 	super(props);
 	this.state={bold:this.props.bold=='true'?true:false,
          size:Number(this.props.size)<Number(this.props.min)?Number(this.props.min):Number(this.props.size)>Number(this.props.max)?Number(this.props.max):Number(this.props.size), 
-         hidden:true}
+         hidden:false}
     }
 
 	toggleHidden(){
 		this.setState({hidden:!this.state.hidden});
+        document.getElementById("boldCheckbox").hidden=this.state.hidden;
+        document.getElementById("decreaseButton").hidden=this.state.hidden;
+        document.getElementById("fontSizeSpan").hidden=this.state.hidden;
+        document.getElementById("increaseButton").hidden=this.state.hidden;
 	}
 
 	toggleBold(){
@@ -29,8 +33,8 @@ class FontChooser extends React.Component {
 		var bold=this.state.bold?"bold":"normal";
 		var check=this.state.bold?"checked":"";
 		var size=this.state.size;
+        var sizepx=size+"px";
 		var sizecolor="black";
-        var hide=this.state.hidden;
 		if(size==this.props.max||size==this.props.min)sizecolor="red";
 		var min=Number(this.props.min)>0?Number(this.props.min):1;
 		var max=Number(this.props.max)<Number(this.props.min)?Number(this.props.min):Number(this.props.max);
@@ -38,12 +42,13 @@ class FontChooser extends React.Component {
 
 	return(
 	       <div>
-				<input type="checkbox" id="boldCheckbox" hidden={hide} checked={check} onClick={this.toggleBold.bind(this)}/>
-				<button id="decreaseButton" hidden={hide} onClick={this.decreaseSize.bind(this)}>-</button>
-				<span id="fontSizeSpan" style={{color:sizecolor}} hidden={hide} onDoubleClick={this.returnSize.bind(this)}>{size}</span>
-	       		<button id="increaseButton" hidden={hide} onClick={this.increaseSize.bind(this)}>+</button>
-	       <span style={{fontSize: size, fontWeight: bold}} id="textSpan" onClick={this.toggleHidden.bind(this)}>{this.props.text}</span>
+				<input type="checkbox" id="boldCheckbox" hidden="true" checked={check} onClick={this.toggleBold.bind(this)}/>
+				<button id="decreaseButton" hidden="true" onClick={this.decreaseSize.bind(this)}>-</button>
+				<span id="fontSizeSpan" style={{color:sizecolor}} hidden="true" onDoubleClick={this.returnSize.bind(this)}>{size}</span>
+	       		<button id="increaseButton" hidden="true" onClick={this.increaseSize.bind(this)}>+</button>
+	       <span style={{fontSize: sizepx, fontWeight: bold}} id="textSpan" onClick={this.toggleHidden.bind(this)}>{this.props.text}</span>
 	       </div>
 	);
     }
 }
+
