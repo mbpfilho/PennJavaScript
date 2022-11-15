@@ -38,7 +38,7 @@ class TodoApp extends React.Component {
   }
 
   handleSubmit(e) {
-    e.preventDefault();
+    e.preventDefault(); //para näo reler a página
     var newItem = {
       text: this.state.text,
       id: this.state.id
