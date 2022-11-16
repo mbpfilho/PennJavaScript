@@ -44,11 +44,13 @@ class App extends Component {
       let name=s.name;
       let item=s.item;
       let items = this.state.items;
-      items[name].push(item);
-      this.setState({items:items});
-      alert(name);
-      alert(item);
+      let itemsofName=items[name];
+      alert(itemsofName);
+      itemsofName.push(item);
+      alert(itemsofName);
+      items[name]=itemsofName;
       alert(items);
+      this.setState({items:items});
   }
 
   /**
