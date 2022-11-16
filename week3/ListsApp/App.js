@@ -41,14 +41,17 @@ class App extends Component {
   handleAddItem(s) {
       // Implement this function!
       //alert(s);
-      let name=s.name;
+      let list=s.list;
       let item=s.item;
       let items = this.state.items;
-      let itemsofName=items[name];
+      let itemsofList=items[list];
+      alert(itemsofList);
+      let itemtoList={
+        name:item
+      }
+      itemsofList.push(itemtoList);
       alert(itemsofName);
-      itemsofName.push(item);
-      alert(itemsofName);
-      items[name]=itemsofName;
+      items[list]=itemsofList;
       alert(items);
       this.setState({items:items});
   }

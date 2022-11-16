@@ -17,8 +17,8 @@ class AddItem extends Component {
       alert('Item is required');
     } else {
       this.setState({newItem:{
-      name: this.props.idName,
-      item: this.state.newItem
+      list: this.props.idName,
+      item: this.refs.id.value
       }}, function() {
         //console.log(this.state);
         this.props.addItem(this.state.newItem);
