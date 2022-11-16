@@ -21,6 +21,7 @@ class App extends Component {
    */
   handleAddList(s) {
       // Implement this function!
+      // alert(s);
       let lists = this.state.lists;
       lists.push(s);
       this.setState({lists:lists});
@@ -39,6 +40,15 @@ class App extends Component {
    */
   handleAddItem(s) {
       // Implement this function!
+      //alert(s);
+      let name=s.name;
+      let item=s.item;
+      let items = this.state.items;
+      items[name].push(item);
+      this.setState({items:items});
+      alert(name);
+      alert(item);
+      alert(items);
   }
 
   /**
