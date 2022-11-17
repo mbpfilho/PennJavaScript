@@ -12,7 +12,7 @@ class AddItem extends Component {
   handleSubmit(e) {
       e.preventDefault(); // this prevents the page from reloading -- do not delete this line!
 
-      // Implement the rest of this function here!
+    // Implement the rest of this function here!
     if(this.refs.id.value === '') {
       alert('Item is required');
     } else {

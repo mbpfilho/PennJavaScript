@@ -7,15 +7,13 @@ class AddList extends Component {
       e.preventDefault(); // this prevents the page from reloading -- do not delete this line!
 
       // Implement the rest of this function here!
-      
-    if(this.refs.id.value === '') {
-      alert('Title is required');
-    } else {
-      this.setState({newList: this.refs.id.value}, function() {
-        //console.log(this.state);
-        this.props.addList(this.state.newList);
-      });
-    }
+      if(this.refs.id.value === '') {
+        alert('Title is required');
+      } else {
+        this.setState({newList: this.refs.id.value}, function() {
+          this.props.addList(this.state.newList);
+        });
+      }
   }
 
   render() {

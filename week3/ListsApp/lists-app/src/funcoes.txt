@@ -1,0 +1,61 @@
+handleAddList(s) {
+      // Implement this function!
+      // alert(s);
+      let lists = this.state.lists;
+      lists.push(s);
+      this.setState({lists:lists});
+      alert(this.state.lists)
+      let items = this.state.items;
+      items[s]=[];
+      this.setState({items:items});
+      alert(this.state.items)
+  }
+
+    handleSubmit(e) {
+      e.preventDefault(); // this prevents the page from reloading -- do not delete this line!
+
+      // Implement the rest of this function here!
+      
+    if(this.refs.id.value === '') {
+      alert('Title is required');
+    } else {
+      this.setState({newList: this.refs.id.value}, function() {
+        // alert(this.refs.id.value);
+        // alert(this.state.newList);
+        this.props.addList(this.state.newList);
+      });
+    }
+  }
+
+   handleAddItem(s) {
+      // Implement this function!
+      //alert(s);
+      let list=s.list;
+      let item=s.item;
+      let items = this.state.items;
+      let itemsofList=items[list];
+      // alert(itemsofList);
+      let itemtoList={
+        name:item
+      }
+      itemsofList.push(itemtoList);
+      items[list]=itemsofList;
+      this.setState({items:items});
+  }
+
+   handleSubmit(e) {
+      e.preventDefault(); // this prevents the page from reloading -- do not delete this line!
+
+      // Implement the rest of this function here!
+    if(this.refs.id.value === '') {
+      alert('Item is required');
+    } else {
+      this.setState({newItem:{
+      list: this.props.idName,
+      item: this.refs.id.value
+      }}, function() {
+        //console.log(this.state);
+        this.props.addItem(this.state.newItem);
+      });
+    }
+  }

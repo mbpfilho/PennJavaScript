@@ -21,9 +21,9 @@ class App extends Component {
    */
   handleAddList(s) {
       // Implement this function!
-      // alert(s);
       let lists = this.state.lists;
       lists.push(s);
+      alert(lists)
       this.setState({lists:lists});
       let items = this.state.items;
       items[s]=[];
@@ -39,21 +39,18 @@ class App extends Component {
    * the state, this function  should then re-render this App component.
    */
   handleAddItem(s) {
-      // Implement this function!
-      //alert(s);
-      let list=s.list;
-      let item=s.item;
-      let items = this.state.items;
-      let itemsofList=items[list];
-      alert(itemsofList);
-      let itemtoList={
-        name:item
-      }
-      itemsofList.push(itemtoList);
-      alert(itemsofName);
-      items[list]=itemsofList;
-      alert(items);
-      this.setState({items:items});
+    // Implement this function!
+    let list=s.list;
+    let item=s.item;
+    let items = this.state.items;
+    let itemsofList=items[list];
+    // alert(itemsofList);
+    let itemtoList={
+      name:item
+    }
+    itemsofList.push(itemtoList);
+    items[list]=itemsofList;
+    this.setState({items:items});
   }
 
   /**
