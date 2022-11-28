@@ -8,20 +8,19 @@ var Toy = require('./Toy.js');
 
 app.use('/findToy', (req, res) => {
 	
-	var query = {};
-	if (req.body.id) query.id = req.body.id;
+	
+	if (req.query.id) var id = req.query.id;
+    else res.json({});
 
-	Toy.find( query, (err, toys) => {
+	Toy.findOne({id:id}, (err, toy) => {
 		if (err) {
 		    res.type('html').status(500);
 		    res.send('Error: ' + err);
-		}
-		else {
-		    res.JSON.stringfy(toys);
-		}
+        }else if (!toy) res.json({});
+        else res.json(toy);
 	    });
 	
-}
+})
 
 
 
