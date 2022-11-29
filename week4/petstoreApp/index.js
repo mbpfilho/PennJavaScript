@@ -67,33 +67,35 @@ app.use('/calculatePrice',(req,res)=>{
 	if(idlength>0&&idlength==req.query.qty.length){
         var id=[];
         var qty=[];
+        var terms=[];
         for(let i=0;i<idlength;i++){
             id[i]=req.query,id[i];
             qty[i]=req.query.id[i];
+            terms.push({d:id[i]});
         }
-        Toy.find({id:id},(err,toys)=>{
+        Toy.find({$or:terms},(err,toys)=>{
             if(err){
                 res.type('html').status(500);
                 res.send('Error: '+err);
             }else if(!toys)res.json({})
             else{
-                var toreturn={};
                 var totalPrice=0;
                 var items=[];
                 var subtotal;
-                var price;
 
                 for(let c=0;c<idlength;c++){
-                    subtotal=
+                    toys.forEach((toy)=>{
+                        if(toy.id==id[c]){
+                            subtotal=toy.price*qty[c];
+                            items.push({item:id[c],qty:qty[c],subtotal:subtotal})
+                            totalPrice+=subtotal;
+                        }
+                    })
                 }
-                                
-                .forEach((animal)=>{names.push(animal.name)});
-                res.json({count:animals.length,names:names});
+                res.json({totalPrice:totalPrice,items:items});
             }
         });
-
     }else res.json({});
-
 })
 
 
