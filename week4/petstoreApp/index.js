@@ -34,12 +34,12 @@ app.use('/findAnimals',(req,res)=>{
 		    if(err){
 		        res.type('html').status(500);
 		        res.send('Error: '+err);
-		    }else if(animals.length==0)res.json({});
+		    }//else if(animals.length==0)res.json({});
 	        else{ 
                 var foundAnimals=[];
 
                 animals.forEach((animal)=>{
-                    if((!req.query.species||req.query.species==animal.species)&&(!req.query.gender||req.query.gender==animal.gender)&&(!req.query.trait||animal.trait.includes(req.query.trait))){
+                    if((!req.query.species||req.query.species==animal.species)&&(!req.query.gender||req.query.gender==animal.gender)&&(!req.query.trait||animal.traits.includes(req.query.trait))){
                         foundAnimals.push({name:animal.name,species:animal.species,breed:animal.breed,gender:animal.gender,age:animal.age});
                         //[{"name":"Cooper","species":"Dog","breed":"Catahoula","gender":"male","age":11},{"name":"Felix","species":"Cat","breed":"Tuxedo","gender":"male","age":98}]
                     }   
