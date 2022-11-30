@@ -70,9 +70,10 @@ app.use('/calculatePrice',(req,res)=>{
         for(let i=0;i<idlength;i++){idSet.add(req.query.id[i])}
         var id=Array.from(idSet);
         var qty=[];
+        var j;
         for(let i=0;i<idlength;i++){
             if((req.query.qty[i])>0){
-                let j=id.findIndex((el)=>el==req.query.id[i]);
+                j=id.findIndex((el)=>el==req.query.id[i]);
                 qty[j]+=Number(req.query.qty[i]);
             }
         }
@@ -88,15 +89,25 @@ app.use('/calculatePrice',(req,res)=>{
                 var items=[];
                 var subtotal;
 
-                for(let c=0;c<id.length;c++){
-                    toys.forEach((toy)=>{
-                        if(toy.id==id[c]){
-                            subtotal=toy.price*qty[c];
-                            items.push({item:id[c],qty:qty[c],subtotal:subtotal});
-                            totalPrice+=subtotal;
-                        }
-                    });
-                }
+                toys.forEach((toy)=>{
+                    j=id.findIndex((el)=>el==toy.id);
+                    if(j>=0){
+                        subtotal=toy.price*qty[j];
+                        items.push({item:id[c],qty:qty[c],subtotal:subtotal});
+                        totalPrice+=subtotal;
+                    }
+                    
+                })
+                // for(let c=0;c<id.length;c++){
+                //     toys.forEach((toy)=>{
+                //         if(toy.id==id[c]){
+                //             subtotal=toy.price*qty[c];
+                //             items.push({item:id[c],qty:qty[c],subtotal:subtotal});
+                //             totalPrice+=subtotal;
+                //         }
+                //     });
+                // }
+
                 res.json({totalPrice:totalPrice,items:items});
             }
         });

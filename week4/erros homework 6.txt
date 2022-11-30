@@ -1,0 +1,23 @@
+Copying code to test/ directory
+Running tests; please be patient while tests run
+15 tests passed and 13 tests failed.
+Your score for this assignment would be 53.57142857142857% if you submitted now.
+The following test cases failed:
+1. findAnimal should correctly return Animals when only specifying species
+2. findAnimal should correctly return Animals when only specifying gender
+3. findAnimal should correctly return Animals when only specifying trait
+4. findAnimal should correctly return Animals when specifying all query parameters
+5. calculatePrice should return correct result when some specified ids match items but others do not
+6. calculatePrice should return correct result when some speficied quantities are negative
+7. calculatePrice should return correct result when some speficied quantities are zero
+8. calculatePrice should return correct result when some speficied quantities are non-numeric
+9. calculatePrice should return correct result when one item is specified with quantity = 1
+10. calculatePrice should return correct result when one item is specified with quantity > 1
+11. calculatePrice should return correct result when one item is specified multiple times
+12. calculatePrice should return correct result when multiple items are specified with quantity = 1
+13. calculatePrice should return correct result when multiple items are specified with quantity > 1
+Type the command 'npm test' below to re-run all the tests and see more information.
+codio@cowboyrose-justiceguru:~/workspace/test$ 
+
+
+5. calculatePrice should return correct result when no items match specified id
