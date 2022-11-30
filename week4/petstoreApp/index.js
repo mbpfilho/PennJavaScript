@@ -66,19 +66,22 @@ app.use('/calculatePrice',(req,res)=>{
     var idlength=req.query.id.length;
 	if(idlength>0&&idlength==req.query.qty.length){
         const idSet=new Set();
-        // var terms=[];
-        for(let i=0;i<idlength;i++){idSet.add(req.query.id[i])}
+        var terms=[];
+        for(let i0=0;i0<idlength;i0++){
+            idSet.add(req.query.id[i0]);
+            terms.push({id:req.query.id[i0]});
+        }
         var id=Array.from(idSet);
         var qty=[];
         var j;
         for(let i=0;i<idlength;i++){
             if((req.query.qty[i])>0){
-                j=id.findIndex((el)=>el==req.query.id[i]);
+                j=id.indexOf(req.query.id[i]);
                 qty[j]+=Number(req.query.qty[i]);
             }
         }
 
-        Toy.find((err,toys)=>{
+        Toy.find({$or:terms},(err,toys)=>{
             if(err){
                 res.type('html').status(500);
                 res.send('Error: '+err);
@@ -88,27 +91,18 @@ app.use('/calculatePrice',(req,res)=>{
                 var totalPrice=0;
                 var items=[];
                 var subtotal;
+                var c;
 
                 toys.forEach((toy)=>{
-                    j=id.findIndex((el)=>el==toy.id);
-                    if(j>=0){
-                        subtotal=toy.price*qty[j];
-                        items.push({item:id[c],qty:qty[c],subtotal:subtotal});
+                    c=id.indexOf(toy.id);
+                    if(c>=0){
+                        subtotal=toy.price*qty[c];
+                        items.push({item:id[c],qty:qty[c].toString(),subtotal:subtotal});
                         totalPrice+=subtotal;
                     }
-                    
                 })
-                // for(let c=0;c<id.length;c++){
-                //     toys.forEach((toy)=>{
-                //         if(toy.id==id[c]){
-                //             subtotal=toy.price*qty[c];
-                //             items.push({item:id[c],qty:qty[c],subtotal:subtotal});
-                //             totalPrice+=subtotal;
-                //         }
-                //     });
-                // }
-
-                res.json({totalPrice:totalPrice,items:items});
+                res.json({items:items,totalPrice:totalPrice});
+                //{"items":[{"item":"123","qty":"1","subtotal":10.99}],> "totalPrice":10.99}
             }
         });
     }else res.json({});
