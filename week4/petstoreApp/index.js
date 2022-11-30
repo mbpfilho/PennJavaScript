@@ -71,7 +71,7 @@ app.use('/calculatePrice',(req,res)=>{
         var id=Array.from(idSet);
         var qty=[];
         for(let i=0;i<idlength;i++){
-            if(Number(req.query.qty[i])>0){
+            if((req.query.qty[i])>0){
                 let j=id.findIndex((el)=>el==req.query.id[i]);
                 qty[j]+=Number(req.query.qty[i]);
             }
