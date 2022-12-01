@@ -26,6 +26,7 @@ app.use('/findAnimals',(req,res)=>{
 		    if(err){
 		        res.type('html').status(500);
 		        res.send('Error: '+err);
+            }else if(animals.length==0)res.json({});
 	        else{ 
                 var foundAnimals=[];
 
@@ -70,12 +71,13 @@ app.use('/calculatePrice',(req,res)=>{
             }
             var id=Array.from(idSet);
             var qty=[];
+            var qtt;
             for(let i=0;i<idlength;i++){
                 let j;
-                if((req.query.qty[i])>0){
-                    j=id.indexOf(req.query.id[i]);
-                    qty[j]+=Number(req.query.qty[i]);
-                }
+                qtt=Number(req.query.qty[i]);
+                j=id.indexOf(req.query.id[i]);
+                if(qtt>0)qty[j]+=qtt;
+                else qty[j]=qty[j]?qty[j]:0;
             }
 
             Toy.find({$or:terms},(err,toys)=>{
@@ -83,7 +85,7 @@ app.use('/calculatePrice',(req,res)=>{
                     res.type('html').status(500);
                     res.send('Error: '+err);
                 }
-                // else if(!toys)res.json({})
+                else if(!toys)res.json({});
                 else{
                     var totalPrice=0;
                     var items=[];
