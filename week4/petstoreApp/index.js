@@ -20,28 +20,18 @@ app.use('/findToy',(req, res)=>{
 })
 
 app.use('/findAnimals',(req,res)=>{
-    if(!req.query.species&&!req.body.gender&&!req.query.trait)res.json({});
+    if(!req.query.species&&!req.query.gender&&!req.query.trait)res.json({});
     else{
-        // var terms=[];
-        // if(req.query.species)terms.push({species:req.query.species});
-        // if(req.body.gender)terms.push({gender:req.query.gender});
-        // if(req.query.trait)terms.push({traits:req.query.trait});
-        // // if(req.query.trait)var trait={traits:req.query.trait};
-    
-        // // var query={$or:terms};
-
 	    Animal.find((err,animals)=>{
 		    if(err){
 		        res.type('html').status(500);
 		        res.send('Error: '+err);
-		    }//else if(animals.length==0)res.json({});
 	        else{ 
                 var foundAnimals=[];
 
                 animals.forEach((animal)=>{
                     if((!req.query.species||req.query.species==animal.species)&&(!req.query.gender||req.query.gender==animal.gender)&&(!req.query.trait||animal.traits.includes(req.query.trait))){
                         foundAnimals.push({name:animal.name,species:animal.species,breed:animal.breed,gender:animal.gender,age:animal.age});
-                        //[{"name":"Cooper","species":"Dog","breed":"Catahoula","gender":"male","age":11},{"name":"Felix","species":"Cat","breed":"Tuxedo","gender":"male","age":98}]
                     }   
                 });
                 res.json(foundAnimals);
