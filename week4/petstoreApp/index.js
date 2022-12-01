@@ -59,48 +59,50 @@ app.use('/animalsYoungerThan',(req,res)=>{
 })
 
 app.use('/calculatePrice',(req,res)=>{
-    var idlength=req.query.id.length;
-	if(idlength>0&&idlength==req.query.qty.length){
-        const idSet=new Set();
-        var terms=[];
-        for(let i0=0;i0<idlength;i0++){
-            idSet.add(req.query.id[i0]);
-            terms.push({id:req.query.id[i0]});
-        }
-        var id=Array.from(idSet);
-        var qty=[];
-        var j;
-        for(let i=0;i<idlength;i++){
-            if((req.query.qty[i])>0){
-                j=id.indexOf(req.query.id[i]);
-                qty[j]+=Number(req.query.qty[i]);
+    if(req.query.id&&req.query.qty){
+        var idlength=req.query.id.length;
+        if(idlength>0&&idlength==req.query.qty.length){
+            const idSet=new Set();
+            var terms=[];
+            for(let i0=0;i0<idlength;i0++){
+                idSet.add(req.query.id[i0]);
+                terms.push({id:req.query.id[i0]});
             }
-        }
+            var id=Array.from(idSet);
+            var qty=[];
+            for(let i=0;i<idlength;i++){
+                let j;
+                if((req.query.qty[i])>0){
+                    j=id.indexOf(req.query.id[i]);
+                    qty[j]+=Number(req.query.qty[i]);
+                }
+            }
 
-        Toy.find({$or:terms},(err,toys)=>{
-            if(err){
-                res.type('html').status(500);
-                res.send('Error: '+err);
-            }
-            // else if(!toys)res.json({})
-            else{
-                var totalPrice=0;
-                var items=[];
-                var subtotal;
-                var c;
+            Toy.find({$or:terms},(err,toys)=>{
+                if(err){
+                    res.type('html').status(500);
+                    res.send('Error: '+err);
+                }
+                // else if(!toys)res.json({})
+                else{
+                    var totalPrice=0;
+                    var items=[];
+                    var subtotal;
+                    var c;
 
-                toys.forEach((toy)=>{
-                    c=id.indexOf(toy.id);
-                    if(c>=0){
-                        subtotal=toy.price*qty[c];
-                        items.push({item:id[c],qty:qty[c].toString(),subtotal:subtotal});
-                        totalPrice+=subtotal;
-                    }
-                })
-                res.json({items:items,totalPrice:totalPrice});
-                //{"items":[{"item":"123","qty":"1","subtotal":10.99}],> "totalPrice":10.99}
-            }
-        });
+                    toys.forEach((toy)=>{
+                        c=id.indexOf(toy.id);
+                        if(c>=0){
+                            subtotal=toy.price*qty[c];
+                            items.push({item:id[c],qty:qty[c].toString(),subtotal:subtotal});
+                            totalPrice+=subtotal;
+                        }
+                    })
+                    res.json({items:items,totalPrice:totalPrice});
+                    //{"items":[{"item":"123","qty":"1","subtotal":10.99}],> "totalPrice":10.99}
+                }
+            });
+        }else res.json({});
     }else res.json({});
 })
 

@@ -41,3 +41,20 @@ The following test cases failed:
 11. calculatePrice should return correct result when multiple items are specified with quantity > 1
 Type the command 'npm test' below to re-run all the tests and see more information.
 codio@cowboyrose-justiceguru:~/workspace/test$ 
+
+
+Copying code to test/ directory
+Running tests; please be patient while tests run
+19 tests passed and 9 tests failed.
+Your score for this assignment would be 67.85714285714286% if you submitted now.
+The following test cases failed:
+1. calculatePrice should return correct result when some specified ids match items but others do not
+2. calculatePrice should return correct result when some speficied quantities are negative
+3. calculatePrice should return correct result when some speficied quantities are zero
+4. calculatePrice should return correct result when some speficied quantities are non-numeric
+5. calculatePrice should return correct result when one item is specified with quantity = 1
+6. calculatePrice should return correct result when one item is specified with quantity > 1
+7. calculatePrice should return correct result when one item is specified multiple times
+8. calculatePrice should return correct result when multiple items are specified with quantity = 1
+9. calculatePrice should return correct result when multiple items are specified with quantity > 1
+Type the command 'npm test' below to re-run all the tests and see more information.
