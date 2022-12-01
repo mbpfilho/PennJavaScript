@@ -71,12 +71,12 @@ app.use('/calculatePrice',(req,res)=>{
             }
             var id=Array.from(idSet);
             var qty=[];
-            var qtt;
+            var qqty;
+            var j;
             for(let i=0;i<idlength;i++){
-                let j;
-                qtt=Number(req.query.qty[i]);
+                qqty=Number(req.query.qty[i]);
                 j=id.indexOf(req.query.id[i]);
-                if(qtt>0)qty[j]+=qtt;
+                if(qqty>0)qty[j]+=qqty;
                 else qty[j]=qty[j]?qty[j]:0;
             }
 
@@ -94,7 +94,7 @@ app.use('/calculatePrice',(req,res)=>{
 
                     toys.forEach((toy)=>{
                         c=id.indexOf(toy.id);
-                        if(c>=0){
+                        if(c>=0&&qty[c]>0){
                             subtotal=toy.price*qty[c];
                             items.push({item:id[c],qty:qty[c].toString(),subtotal:subtotal});
                             totalPrice+=subtotal;
