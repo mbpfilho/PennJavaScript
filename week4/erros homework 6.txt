@@ -58,3 +58,50 @@ The following test cases failed:
 8. calculatePrice should return correct result when multiple items are specified with quantity = 1
 9. calculatePrice should return correct result when multiple items are specified with quantity > 1
 Type the command 'npm test' below to re-run all the tests and see more information.
+
+
+> test@1.0.0 test /home/codio/workspace/test
+> mocha
+
+
+
+(node:2050) DeprecationWarning: `open()` is deprecated in mongoose >= 4.11.0, use `openUri()` instead, or set the `useMongoClient` option if using `connect()` or `createConnection()`. See http://mongoosejs.com/docs/connections.html#use-mongo-client
+Listening on port 3000
+  findToy
+    ✓ findToy should be able to find a Toy in the database using its id (42ms)
+    ✓ findToy should return empty JSON when there is no Toy with specified id
+    ✓ findToy should return empty JSON when Toy id is not specified
+
+  findAnimal
+    ✓ findAnimal should return empty JSON when no query parameters are specified
+    ✓ findAnimal should return empty JSON when no Animal matches any query parameters
+    ✓ findAnimal should return empty JSON when Animal matches some but not all query parameters
+    ✓ findAnimal should correctly return Animals when only specifying species
+    ✓ findAnimal should correctly return Animals when only specifying gender
+    ✓ findAnimal should correctly return Animals when only specifying trait
+    ✓ findAnimal should correctly return Animals when specifying all query parameters
+
+  animalsYoungerThan
+    ✓ animalsYoungerThan should return empty JSON when no age specified
+    ✓ animalsYoungerThan should return correct result when there are no Animals younger than specified age
+    ✓ animalsYoungerThan should return empty JSON when specified age is non-numeric
+    ✓ animalsYoungerThan should return correct output when one Animal is younger than specified age
+    ✓ animalsYoungerThan should return correct output when more than one Animal is younger than specified age
+    ✓ animalsYoungerThan should return correct output when Animal age is equal to but not less than specified age
+
+  calculatePrice
+    ✓ calculatePrice should return empty JSON when no query parameters are specified
+    ✓ calculatePrice should return empty JSON when number of specified ids does not match number of specified quantities
+    ✓ calculatePrice should return correct result when no items match specified id
+    ✓ calculatePrice should return correct result when some specified ids match items but others do not
+    ✓ calculatePrice should return correct result when some speficied quantities are negative
+    ✓ calculatePrice should return correct result when some speficied quantities are zero
+    ✓ calculatePrice should return correct result when some speficied quantities are non-numeric
+    ✓ calculatePrice should return correct result when one item is specified with quantity = 1
+    ✓ calculatePrice should return correct result when one item is specified with quantity > 1
+    ✓ calculatePrice should return correct result when one item is specified multiple times
+    ✓ calculatePrice should return correct result when multiple items are specified with quantity = 1
+    ✓ calculatePrice should return correct result when multiple items are specified with quantity > 1
+
+
+  28 passing (189ms)

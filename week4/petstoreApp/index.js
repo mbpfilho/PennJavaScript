@@ -10,7 +10,7 @@ app.use('/findToy',(req, res)=>{
 	if(req.query.id)var id=req.query.id;
     else res.json({});
 
-	Toy.find({id:id},(err,toy)=>{
+	Toy.findOne({id:id},(err,toy)=>{
 		if(err){
 		    res.type('html').status(500);
 		    res.send('Error: '+err);
@@ -74,10 +74,11 @@ app.use('/calculatePrice',(req,res)=>{
             var qqty;
             var j;
             for(let i=0;i<idlength;i++){
-                qqty=Number(req.query.qty[i]);
+                qqty=Number(req.query.qty[i])?Number(req.query.qty[i]):0;
                 j=id.indexOf(req.query.id[i]);
-                if(qqty>0)qty[j]+=qqty;
-                else qty[j]=qty[j]?qty[j]:0;
+                if(qty[j]&&qqty>0)qty[j]+=qqty;
+                else if(qqty>0)qty[j]=qqty;
+                else qty[j]=0;
             }
 
             Toy.find({$or:terms},(err,toys)=>{
